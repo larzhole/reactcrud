@@ -3,9 +3,7 @@ const businessRoutes = express.Router();
 
 let Business = require('./business.model');
 
-businessRoutes.route('/add').post((req, res) => {
-	console.log('/add');
-	console.log(req);
+businessRoutes.route('/').post((req, res) => {
 	let business = new Business(req.body);
 	business.save()
 		.then((b) => {
@@ -26,13 +24,14 @@ businessRoutes.route('/').get((req, res) => {
 });
 
 businessRoutes.route('/edit/:id').get((req, res) => {
+	console.log('/edit/:id');
 	let id = req.params.id;
 	Business.findById(id, (error, business) => {
 		res.json(business);
 	})
 });
 
-businessRoutes.route('/update/:id').put((req, res) => {
+businessRoutes.route('/:id').put((req, res) => {
 	Business.findById(req.params.id, (error, business) => {
 		if (!business) {
 			res.status(404).send('business data is not found');
@@ -50,7 +49,7 @@ businessRoutes.route('/update/:id').put((req, res) => {
 	});
 });
 
-businessRoutes.route('/delete/:id').delete((req, res) => {
+businessRoutes.route('/:id').delete((req, res) => {
 	Business.findByIdAndRemove({_id: req.params.id}, (error, business) => {
 		if (error) {
 			res.json(error);
