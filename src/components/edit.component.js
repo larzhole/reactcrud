@@ -17,7 +17,7 @@ export default class Edit extends Component {
   }
 
   componentDidMount() {
-      axios.get('http://localhost:4000/business/edit/'+this.props.match.params.id)
+      axios.get('http://localhost:4000/business/edit/' + this.props.match.params.id)
           .then(response => {
               this.setState({ 
                 personName: response.data.personName, 
@@ -34,11 +34,13 @@ export default class Edit extends Component {
       personName: e.target.value
     });
   }
+
   onChangeBusinessName(e) {
     this.setState({
       businessName: e.target.value
     })  
   }
+
   onChangeGstNumber(e) {
     this.setState({
       businessGstNumber: e.target.value
@@ -53,9 +55,10 @@ export default class Edit extends Component {
       businessGstNumber: this.state.businessGstNumber
     };
     axios.put('http://localhost:4000/business/' + this.props.match.params.id, obj)
-        .then(res => console.log(res.data));
-    
-    this.props.history.push('/index');
+        .then((res) => {
+           console.log(res.data);
+           this.props.history.push('/index');
+        });
   }
  
   render() {

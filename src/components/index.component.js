@@ -5,6 +5,8 @@ import TableRow from './TableRow';
 export default class Index extends Component {
 
 	constructor(props) {
+		console.log('index props:');
+		console.log(props);
 		super(props);
 		this.state = {
 			business: []
@@ -14,6 +16,7 @@ export default class Index extends Component {
 	componentDidMount() {
 		axios.get('http://localhost:4000/business')
 			.then((response) => {
+				console.log(response);
 				this.setState({business: response.data});
 			}).catch((error) => {
 				console.log(error);
@@ -22,7 +25,10 @@ export default class Index extends Component {
 
 	tabRow() {
 		return this.state.business.map((object, i) => {
-			return <TableRow obj={object} key={i} />;
+			return <TableRow
+					obj={object} 
+					key={i} 
+					/>;
 		});
 	}
 
