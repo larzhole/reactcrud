@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
-import './TableRow.css';
-
 class TableRow extends Component {
 
 	constructor(props) {
